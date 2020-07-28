@@ -13,7 +13,7 @@ TalentAutomation/Talent.Tests/bin/
 
 #TestResults files
 TestResults/
-Talent.Tests/Reports/
+TalentAutomation/Talent.Tests/Reports/
 
 # User-specific files
 *.rsuser
