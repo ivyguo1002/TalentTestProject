@@ -1,0 +1,9 @@
+C:\Ivy\source\repos\Talent\TalentAutomation\Framework\bin\Debug\netcoreapp3.1\Framework.deps.json
+C:\Ivy\source\repos\Talent\TalentAutomation\Framework\bin\Debug\netcoreapp3.1\Framework.dll
+C:\Ivy\source\repos\Talent\TalentAutomation\Framework\bin\Debug\netcoreapp3.1\Framework.pdb
+C:\Ivy\source\repos\Talent\TalentAutomation\Framework\obj\Debug\netcoreapp3.1\Framework.csprojAssemblyReference.cache
+C:\Ivy\source\repos\Talent\TalentAutomation\Framework\obj\Debug\netcoreapp3.1\Framework.AssemblyInfoInputs.cache
+C:\Ivy\source\repos\Talent\TalentAutomation\Framework\obj\Debug\netcoreapp3.1\Framework.AssemblyInfo.cs
+C:\Ivy\source\repos\Talent\TalentAutomation\Framework\obj\Debug\netcoreapp3.1\Framework.dll
+C:\Ivy\source\repos\Talent\TalentAutomation\Framework\obj\Debug\netcoreapp3.1\Framework.pdb
+C:\Ivy\source\repos\Talent\TalentAutomation\Framework\obj\Debug\netcoreapp3.1\Framework.csproj.CoreCompileInputs.cache

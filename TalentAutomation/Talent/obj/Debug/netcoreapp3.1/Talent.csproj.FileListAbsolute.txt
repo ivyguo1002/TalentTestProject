@@ -1,0 +1,12 @@
+C:\Ivy\source\repos\Talent\TalentAutomation\Talent\bin\Debug\netcoreapp3.1\Talent.deps.json
+C:\Ivy\source\repos\Talent\TalentAutomation\Talent\bin\Debug\netcoreapp3.1\Talent.dll
+C:\Ivy\source\repos\Talent\TalentAutomation\Talent\bin\Debug\netcoreapp3.1\Talent.pdb
+C:\Ivy\source\repos\Talent\TalentAutomation\Talent\bin\Debug\netcoreapp3.1\Framework.dll
+C:\Ivy\source\repos\Talent\TalentAutomation\Talent\bin\Debug\netcoreapp3.1\Framework.pdb
+C:\Ivy\source\repos\Talent\TalentAutomation\Talent\obj\Debug\netcoreapp3.1\Talent.csprojAssemblyReference.cache
+C:\Ivy\source\repos\Talent\TalentAutomation\Talent\obj\Debug\netcoreapp3.1\Talent.AssemblyInfoInputs.cache
+C:\Ivy\source\repos\Talent\TalentAutomation\Talent\obj\Debug\netcoreapp3.1\Talent.AssemblyInfo.cs
+C:\Ivy\source\repos\Talent\TalentAutomation\Talent\obj\Debug\netcoreapp3.1\Talent.csproj.CopyComplete
+C:\Ivy\source\repos\Talent\TalentAutomation\Talent\obj\Debug\netcoreapp3.1\Talent.dll
+C:\Ivy\source\repos\Talent\TalentAutomation\Talent\obj\Debug\netcoreapp3.1\Talent.pdb
+C:\Ivy\source\repos\Talent\TalentAutomation\Talent\obj\Debug\netcoreapp3.1\Talent.csproj.CoreCompileInputs.cache
