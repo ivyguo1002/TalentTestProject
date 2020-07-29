@@ -10,7 +10,7 @@ using Talent.Models;
 
 namespace Talent.Services
 {
-    public static class TokenHelper
+    public class TokenHelper
     {
         public static Token TalentToken => GetTokenAs(Role.talent);
         public static Token EmployerToken => GetTokenAs(Role.employer);
@@ -24,14 +24,14 @@ namespace Talent.Services
             return tokenObject;
         }
 
-        public static void SetToken(Token token)
+        public static void SetToken(Token token, Driver driver)
         {
             var script = "localStorage.setItem(arguments[0], arguments[1])";
 
-            Driver.ExecuteScript(script, "access_token", token.TokenId);
-            Driver.ExecuteScript(script, "username", token.Username);
-            Driver.ExecuteScript(script, "expiry_on", token.Expires);
-            Driver.ExecuteScript(script, "talent-permission-scope", $"[\"{token.UserRole}\"]");   
+            driver.ExecuteScript(script, "access_token", token.TokenId);
+            driver.ExecuteScript(script, "username", token.Username);
+            driver.ExecuteScript(script, "expiry_on", token.Expires);
+            driver.ExecuteScript(script, "talent-permission-scope", $"[\"{token.UserRole}\"]");   
         }
     }
 }

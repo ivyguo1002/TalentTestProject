@@ -14,6 +14,7 @@ namespace Framework.Selenium
     public class Element
     {
         public IWebElement Current { get; set; }
+        public Driver Driver { get; set; }
 
         public string Name { get; set; }
 
@@ -51,6 +52,12 @@ namespace Framework.Selenium
             By = by;
         }
 
+        public Element(IWebElement element, By by, Driver driver)
+        {
+            Current = element;
+            By = by;
+            Driver = driver;
+        }
         public string GetAttribute(string attrName) => Current.GetAttribute(attrName);
         public string GetCssValue(string cssProperty) => Current.GetCssValue(cssProperty);
 
@@ -91,14 +98,13 @@ namespace Framework.Selenium
             var action = new Actions(Driver.Current);
             action.MoveToElement(Current).Perform();
         }
-
         public Element FindElement(By by, int timeout = TimeoutSetting.ElementWaitTimeout)
         {
             try
             {
                 var wait = new WebDriverWait(Driver.Current, TimeSpan.FromSeconds(timeout));
                 var element = wait.Until(driver => Current.FindElement(by));
-                return new Element(element, by);
+                return new Element(element) { By = by, Driver = this.Driver};
             }
             catch (WebDriverTimeoutException)
             {
@@ -115,7 +121,7 @@ namespace Framework.Selenium
                 var elementList = new List<Element>();
                 foreach (var element in elements)
                 {
-                    elementList.Add(new Element(element));
+                    elementList.Add(new Element(element, by, this.Driver));
                 }
                 return elementList;
             }
@@ -173,7 +179,7 @@ namespace Framework.Selenium
             }
             catch (WebDriverTimeoutException)
             {
-                ReportHelper.LogTestStepInfo($"Exception in WaitForTextLoaded: text in element located by {By} not loaded within {timeout} seconds");
+                throw new WebDriverTimeoutException($"Exception in WaitForTextLoaded: text in element located by {By} not loaded within {timeout} seconds");
             }
         }
 

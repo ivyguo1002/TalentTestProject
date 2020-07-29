@@ -9,11 +9,11 @@ namespace Talent.Pages.Dashboard
         public override string Title => "Dashboard";
         public override string Url => "/dashboard";
 
-        public GlobalHeader GlobalHeader;
+        public GlobalHeader GlobalHeader { get; set; }
 
-        public DashboardPage()
+        public DashboardPage(Driver driver) : base(driver)
         {
-            GlobalHeader = new GlobalHeader();
+            GlobalHeader = new GlobalHeader(driver);
         }
     }
 }

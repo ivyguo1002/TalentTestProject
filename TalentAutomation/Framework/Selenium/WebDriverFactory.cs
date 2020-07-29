@@ -27,7 +27,7 @@ namespace Framework.Selenium
                 throw new ArgumentException($"browser isn't supported");
             }
 
-            ReportHelper.LogTestStepInfo($"Build {webDriverType} {browserType} Web Driver");
+            //ReportHelper.LogTestStepInfo($"Build {webDriverType} {browserType} Web Driver");
 
             switch (webDriverType)
             {

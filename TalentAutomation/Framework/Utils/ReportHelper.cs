@@ -15,13 +15,13 @@ namespace Framework.Utils
 {
     public class ReportHelper
     {
-        private static AventStack.ExtentReports.ExtentReports Extent { get; set; }
-
-        [ThreadStatic] private static ExtentTest _currentTest;
+        [ThreadStatic] private static ExtentTest _scenario;
+        [ThreadStatic] private static ExtentTest _step;
+        public static AventStack.ExtentReports.ExtentReports Extent { get; set; }
         public static string CreateReportDirectory()
         {
             var reportFolder = FW.BaseDir + FW.Settings.Test.ReportPath;
-            
+
             return Directory.CreateDirectory(reportFolder + "Report" +
                 DateTime.Now.ToString("_MM_dd_yyyy_HH-mm") + "\\").ToString();
         }
@@ -34,59 +34,43 @@ namespace Framework.Utils
             Extent.AttachReporter(htmlReporter);
         }
 
-        public static void LogTestStepInfo(string message)
+        public static void AddScenarioInfo(string featureTitle, string scenarioTitle)
         {
-            _currentTest.Info(message);
-        }
+            _scenario = ReportHelper.Extent.CreateTest<AventStack.ExtentReports.Gherkin.Model.Feature>(featureTitle)
 
-        public static void AddErrorLogToReport(Exception e)
-        {
-            _currentTest.Fail(e);
-        }
-
-        public static void AddTestMethodMetadataToReport(TestContext testContext, List<string> categories)
-        {
-            _currentTest = Extent.CreateTest(testContext.Test.MethodName);
-            
-            if (categories != null)
-            {
-                foreach (var category in categories)
-                {
-                    _currentTest.AssignCategory(category);
-                }
-            }
-        }
-
-        public static void AddTestOutcomeToReport(TestContext testContext)
-        {
-            var result = testContext.Result.Outcome.Status;
-            var testName = testContext.Test.MethodName;
-
-            switch (result)
-            {
-                case TestStatus.Failed:
-                    var screenshotFilePath = Driver.TakeScreenshot(testName);
-                    _currentTest.Fail($"{testContext.Result.Message} {testContext.Result.StackTrace}")
-                        .AddScreenCaptureFromPath(screenshotFilePath);
-                    break;
-                case TestStatus.Inconclusive:
-                    break;
-                case TestStatus.Passed:
-                    _currentTest.Pass($"Test Passed: {testName}");
-                    break;
-
-                case TestStatus.Skipped:
-                    _currentTest.Skip($"Test Skipped: {testName}");
-                    break;
-
-                default:
-                    break;
-            }
+            .CreateNode<AventStack.ExtentReports.Gherkin.Model.Scenario>(scenarioTitle);
         }
 
         public static void Flush()
         {
             Extent.Flush();
+        }
+
+        public static void AddStepInfo(string keyword, string text)
+        {
+            switch (keyword)
+            {
+                case "Given":
+                    _step = _scenario.CreateNode<Given>(text);
+                    break;
+                case "And":
+                    _step = _scenario.CreateNode<And>(text);
+                    break;
+                case "When":
+                    _step = _scenario.CreateNode<When>(text);
+                    break;
+                case "Then":
+                    _step = _scenario.CreateNode<Then>(text);
+                    break;
+
+                default:
+                    throw (new ArgumentOutOfRangeException("The step isn't defined"));
+            }
+        }
+
+        public static void AddTestError(Exception error, string screenshotPath)
+        {
+            _step.Fail($"{error.Message} {error.StackTrace}", MediaEntityBuilder.CreateScreenCaptureFromPath(screenshotPath).Build());
         }
 
     }

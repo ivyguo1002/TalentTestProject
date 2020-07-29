@@ -29,7 +29,7 @@ namespace Talent.Pages.Jobs
         private JobStatus ClosedStatus = new JobStatus { JobStatusText = "Closed" , JobStatusColour = Color.FromName("gray")};
         
 
-        public JobsPage()
+        public JobsPage(Driver driver) : base(driver)
         {
             Filter = new Filter();
         }
@@ -47,7 +47,7 @@ namespace Talent.Pages.Jobs
       
         public bool IsJobStatusDisplayedWell()
         {
-            ReportHelper.LogTestStepInfo("Check if the job status is displayed well: the colour should match the text");
+            //ReportHelper.LogTestStepInfo("Check if the job status is displayed well: the colour should match the text");
             switch (JobStatusAttr.JobStatusText)
             {
                 case "Closed":
@@ -60,13 +60,13 @@ namespace Talent.Pages.Jobs
         }
         public void ClickJobSwitch()
         {
-            ReportHelper.LogTestStepInfo("Click the job status switch");
+            //ReportHelper.LogTestStepInfo("Click the job status switch");
             FirstJobSwitch.Click();
         }
 
         public bool IsJobStatusChanged(JobStatus oldJobStatus, JobStatus newJobStatus)
         {
-            ReportHelper.LogTestStepInfo("Check if the job status is changed");
+            //ReportHelper.LogTestStepInfo("Check if the job status is changed");
             switch (oldJobStatus.JobStatusText)
             {
                 case "Closed":

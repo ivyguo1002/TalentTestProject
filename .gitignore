@@ -9,11 +9,11 @@ docker-compose.yml
 #bin
 TalentAutomation/Talent/bin/
 TalentAutomation/Framework/bin/
-TalentAutomation/Talent.Tests/bin/
+TalentAutomation/Talent.Specflow/bin/
 
 #TestResults files
 TestResults/
-TalentAutomation/Talent.Tests/Reports/
+TalentAutomation/Talent.Specflow/Reports/
 
 # User-specific files
 *.rsuser

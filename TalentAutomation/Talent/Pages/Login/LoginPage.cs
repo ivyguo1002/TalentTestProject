@@ -14,10 +14,11 @@ namespace Talent.Pages.Login
         private Element PasswordTextBox => Driver.FindElement(By.Id("password"));
         private Element LoginBtn => Driver.FindElement(By.Id("btn_login"));
 
+        public LoginPage(Driver driver) : base(driver) {}
 
         public void LoginAs(User user)
         {
-            ReportHelper.LogTestStepInfo($"Log in as user Email: {user.Email} Password:{user.Password}");
+            //ReportHelper.LogTestStepInfo($"Log in as user Email: {user.Email} Password:{user.Password}");
             EmailTextBox.SendKeys(user.Email);
             PasswordTextBox.SendKeys(user.Password);
             LoginBtn.Click();

@@ -1,4 +1,5 @@
-﻿using Talent.Models;
+﻿using Framework.Selenium;
+using Talent.Models;
 using Talent.Pages.Base;
 
 namespace Talent.Pages.Profile
@@ -9,9 +10,9 @@ namespace Talent.Pages.Profile
         public override string Title => "Profile";
 
         public Skills Skills;
-        public ProfilePage()
+        public ProfilePage(Driver driver) : base(driver)
         {
-            Skills = new Skills();
+            Skills = new Skills(driver);
         }
     }
 }

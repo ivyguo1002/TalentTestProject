@@ -16,7 +16,7 @@ namespace API.TalentAPI
         private const string SkillAPI = "/api/profile/skills";
         public static string PostSkill(Skill skill)
         {
-            ReportHelper.LogTestStepInfo($"Post a skill through API {SkillAPI}");
+            //ReportHelper.LogTestStepInfo($"Post a skill through API {SkillAPI}");
             var client = new RestClient(FW.Settings.Test.TalentAPI);
             var request = new RestRequest(SkillAPI)
             {

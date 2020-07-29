@@ -1,0 +1,14 @@
+﻿[
+  {
+    "Key": "valid",
+    "Email": "talent@mvp.studio",
+    "Password": "GLobalTalent",
+    "Role": "talent"
+  },
+  {
+    "Key": "invalid",
+    "Email": "talent@mvp.studio",
+    "Password": "GLobalTalent123",
+    "Role": "talent"
+  }
+]

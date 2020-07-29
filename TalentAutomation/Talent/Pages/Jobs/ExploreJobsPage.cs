@@ -1,4 +1,5 @@
-﻿using Talent.Pages.Base;
+﻿using Framework.Selenium;
+using Talent.Pages.Base;
 
 namespace Talent.Pages.Jobs
 {
@@ -7,5 +8,8 @@ namespace Talent.Pages.Jobs
         public override string Title => "Explore Jobs - GTIO";
         public override string Url => "/jobs/explore";
 
+        public ExploreJobsPage(Driver driver) : base(driver)
+        {
+        }
     }
 }

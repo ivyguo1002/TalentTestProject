@@ -9,6 +9,12 @@ namespace Framework.Selenium
 {
     public class WindowManager
     {
+        public Driver Driver { get; set; }
+
+        public WindowManager(Driver driver)
+        {
+            Driver = driver;
+        }
         public ReadOnlyCollection<string> CurrentWindows => Driver.Current.WindowHandles;
         public Size ScreenSize { get {
                 var jsx = "return window.screen.availWidth";

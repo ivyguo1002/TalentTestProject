@@ -14,43 +14,43 @@ using System.Text;
 
 namespace Framework.Selenium
 {
-    public static class Driver
+    public class Driver
     {
-        [ThreadStatic] private static IWebDriver _driver;
-        [ThreadStatic] public static WebDriverWait Wait;
-        [ThreadStatic] public static WindowManager Window;
-        public static IWebDriver Current => _driver ?? throw new NullReferenceException("");
+        private IWebDriver _driver;
+        public WebDriverWait Wait;
+        public WindowManager Window;
+        public IWebDriver Current => _driver ?? throw new NullReferenceException("");
 
-        public static string Title => Current.Title;
+        public string Title => Current.Title;
 
-        public static string Url => Current.Url;
-        public static void Init()
+        public string Url => Current.Url;
+
+        public Driver()
         {
             _driver = WebDriverFactory.Build();
             Wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(FW.Settings.Driver.DefaultWait));
-            Window = new WindowManager();
-            //Window.Maximize();
+            Window = new WindowManager(this);
         }
 
-        public static void Quit()
+        public void Quit()
         {
-            ReportHelper.LogTestStepInfo("Quit the web driver");
+            //ReportHelper.LogTestStepInfo("Quit the web driver");
             if (Current != null)
             {
                 Current.Quit();
             }
         }
 
-        public static void GoToUrl(string url)
+        public void GoToUrl(string url)
         {
             Current.Navigate().GoToUrl(url);
         }
-        public static void Refresh()
+        public void Refresh()
         {
             Current.Navigate().Refresh();
         }
 
-        public static string TakeScreenshot(string testName)
+        public string TakeScreenshot(string testName)
         {
             var screenshot = ((ITakesScreenshot)Current).GetScreenshot();
             var screenshotFilePath = FW.BaseDir + FW.Settings.Test.ScreenshotPath + testName + DateTime.Now.ToString("_MM_dd_yyyy_HH-mm") + ".png";
@@ -58,17 +58,17 @@ namespace Framework.Selenium
             return screenshotFilePath;
         }
 
-        public static void ExecuteScript(string script, params object[] args) => Current.ExecuteJavaScript(script, args);
+        public void ExecuteScript(string script, params object[] args) => Current.ExecuteJavaScript(script, args);
 
-        public static T ExecuteScript<T>(string script, params object[] args) => Current.ExecuteJavaScript<T>(script, args); 
+        public T ExecuteScript<T>(string script, params object[] args) => Current.ExecuteJavaScript<T>(script, args);
 
-        public static Element FindElement(By by, int timeout = TimeoutSetting.ElementWaitTimeout)
+        public Element FindElement(By by, int timeout = TimeoutSetting.ElementWaitTimeout)
         {
             try
             {
                 var wait = new WebDriverWait(Current, TimeSpan.FromSeconds(timeout));
                 var element = wait.Until(driver => driver.FindElement(by));
-                return new Element(element) {By = by};
+                return new Element(element) { By = by , Driver = this};
             }
             catch (WebDriverTimeoutException)
             {
@@ -76,7 +76,7 @@ namespace Framework.Selenium
             }
         }
 
-        public static List<Element> FindElements(By by, int timeout = TimeoutSetting.ElementWaitTimeout)
+        public List<Element> FindElements(By by, int timeout = TimeoutSetting.ElementWaitTimeout)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace Framework.Selenium
                 var elementList = new List<Element>();
                 foreach (var element in elements)
                 {
-                    elementList.Add(new Element(element));
+                    elementList.Add(new Element(element, by, this));
                 }
                 return elementList;
             }
@@ -96,13 +96,13 @@ namespace Framework.Selenium
             }
         }
 
-        public static void WaitForPageLoaded(string title, int timeout = TimeoutSetting.ElementWaitTimeout)
+        public void WaitForPageLoaded(string title, int timeout = TimeoutSetting.ElementWaitTimeout)
         {
             try
             {
                 var wait = new WebDriverWait(Current, TimeSpan.FromSeconds(timeout));
-                wait.Until( driver => driver.Title.Contains(title, StringComparison.OrdinalIgnoreCase));
-              
+                wait.Until(driver => driver.Title.Contains(title, StringComparison.OrdinalIgnoreCase));
+
             }
             catch (WebDriverTimeoutException)
             {
@@ -110,8 +110,8 @@ namespace Framework.Selenium
             }
         }
 
-        public static void ResetDriver() => ExecuteScript("window.localStorage.clear");
-        public static bool HasSuccessMessage()
+        public void ResetDriver() => ExecuteScript("window.localStorage.clear");
+        public bool HasSuccessMessage()
         {
             try
             {
@@ -126,16 +126,17 @@ namespace Framework.Selenium
             return true;
         }
 
-        public static string GetMessage()
+        public string GetMessage()
         {
             var message = FindElement(By.CssSelector("div.ant-message span"));
             return message.Text;
         }
 
-        public static void SelectDropDownList(string menuName)
+        public void SelectDropDownList(string menuName)
         {
-            var menu = Driver.FindElement(By.XPath("//li[contains(.,'" + menuName + "')]"));
+            var menu = Current.FindElement(By.XPath("//li[contains(.,'" + menuName + "')]"));
             menu.Click();
         }
+
     }
 }

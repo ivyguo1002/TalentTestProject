@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Framework.Selenium;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Talent.Pages.Dashboard;
@@ -8,21 +9,22 @@ using Talent.Pages.Profile;
 
 namespace Talent.Pages
 {
-    public static class PageFactory
+    public class PageFactory
     {
-        [ThreadStatic] public static LoginPage Login;
-        [ThreadStatic] public static DashboardPage Dashboard;
-        [ThreadStatic] public static ProfilePage Profile;
-        [ThreadStatic] public static ExploreJobsPage ExploreJobs;
-        [ThreadStatic] public static JobsPage Jobs;
+        public LoginPage Login { get; set; }
+        public DashboardPage Dashboard { get; set; }
+        public ProfilePage Profile { get; set; }
+        public ExploreJobsPage ExploreJobs { get; set; }
+        public JobsPage Jobs { get; set; }
 
-        public static void Init()
+        public PageFactory(Driver driver)
         {
-            Login = new LoginPage();
-            Dashboard = new DashboardPage();
-            Profile = new ProfilePage();
-            ExploreJobs = new ExploreJobsPage();
-            Jobs = new JobsPage();
+            Login = new LoginPage(driver);
+            Dashboard = new DashboardPage(driver);
+            Profile = new ProfilePage(driver);
+            ExploreJobs = new ExploreJobsPage(driver);
+            Jobs = new JobsPage(driver);
         }
+
     }
 }

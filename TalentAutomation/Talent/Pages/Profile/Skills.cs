@@ -12,6 +12,7 @@ namespace Talent.Pages.Profile
 {
     public class Skills
     {
+        public Driver Driver { get; set; }
         private Element SkillsSection => Driver.FindElement(By.XPath("//div[contains(@class,'ant-collapse-item')][contains(., 'Skills')]"));
         private Element SkillsHeader => SkillsSection.FindElement(By.CssSelector(".ant-collapse-header"));
         private Element AddNewSkillBtn => SkillsSection.FindElement(By.CssSelector(".ant-btn-dashed"));
@@ -28,6 +29,10 @@ namespace Talent.Pages.Profile
 
         private Element CloseIcon => SkillsSection.FindElement(By.CssSelector(".anticon-close"));
 
+        public Skills(Driver driver)
+        {
+            Driver = driver;
+        }
         public bool? IsUpdated(Skill skill)
         {
             return Driver.HasSuccessMessage();
@@ -36,7 +41,7 @@ namespace Talent.Pages.Profile
 
         public void AddSkill(Skill skill)
         {
-            ReportHelper.LogTestStepInfo("Add a new skill");
+            //ReportHelper.LogTestStepInfo("Add a new skill");
 
             SkillsHeader.ExpandHeader();
             AddNewSkillBtn.Click();
@@ -48,14 +53,14 @@ namespace Talent.Pages.Profile
 
         public bool IsAdded(Skill skill)
         {
-            ReportHelper.LogTestStepInfo("Check if the skill has been added");
+            //ReportHelper.LogTestStepInfo("Check if the skill has been added");
             return Driver.HasSuccessMessage();
             //todo: Add assertion for message text
         }
 
         public void EditSkill(Skill skill, Skill updatedSkill)
         {
-            ReportHelper.LogTestStepInfo("Edit the skill");
+            //ReportHelper.LogTestStepInfo("Edit the skill");
             SkillsHeader.ExpandHeader();
             int rowIndex = GetRowIndex(skill);
             EditIcon(rowIndex).Click();
@@ -67,7 +72,7 @@ namespace Talent.Pages.Profile
 
         public void DeleteSkill(Skill skill)
         {
-            ReportHelper.LogTestStepInfo("Delete the skill");
+            //ReportHelper.LogTestStepInfo("Delete the skill");
             SkillsHeader.ExpandHeader();
             var rowIndex = GetRowIndex(skill);
             DeleteIcon(rowIndex).Click();
@@ -81,7 +86,7 @@ namespace Talent.Pages.Profile
 
         public bool IsDisplayed(Skill skill)
         {
-            ReportHelper.LogTestStepInfo($"Check if the skill is displayed");
+            //ReportHelper.LogTestStepInfo($"Check if the skill is displayed");
             SkillsHeader.ExpandHeader();
             int rowIndex = GetRowIndex(skill);
             if (rowIndex != -1)

@@ -1,0 +1,26 @@
+{
+  "Test": {
+    "BaseUrl": "http://localhost:5034",
+    //"BaseUrl": "http://host.docker.internal:3000",
+
+    "IdentityAPI": "http://localhost:60001",
+
+    "TalentAPI": "http://localhost:60002",
+
+    "ReportPath": "Reports\\",
+    "ScreenshotPath": "Reports\\Screenshots\\"
+  },
+  "Driver": {
+    "WebDriverType": "Local",
+    "BrowserType": "Firefox",
+    "DefaultWait": 10
+  },
+  "Chrome": {
+    "PlatForm": "Windows 10",
+    "BrowserVersion": "latest"
+  },
+  "Firefox": {
+    "PlatForm": "Windows 10",
+    "BrowserVersion": "latest"
+  }
+}

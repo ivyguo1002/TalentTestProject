@@ -10,6 +10,11 @@ namespace Talent.Pages.Base
 {
     public class GlobalHeader
     {
+        public Driver Driver { get; set; }
+        public GlobalHeader(Driver driver)
+        {
+            Driver = driver;
+        }
         private Element JobsMenu => Driver.FindElement(By.XPath("//*[@class='ant-menu-submenu-title'][contains(.,'Jobs')]"));
 
         private Element ExploreJobsMenu => Driver.FindElement(By.CssSelector("a[href='/jobs/explore']"));
