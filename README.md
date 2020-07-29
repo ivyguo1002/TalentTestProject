@@ -1,4 +1,7 @@
-Talent Specflow Project
+Master Branch: Talent Selenium Nunit Project
+Specflow Branch: Talent Specflow Project
+
+
 Framework
 1. Customize Selenium Framework: 
     Wrapper Class for IWebDriver and IWebElement. Customize the 
