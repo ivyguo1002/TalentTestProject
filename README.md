@@ -1,4 +1,5 @@
 Master Branch: Talent Selenium Nunit Project
+
 Specflow Branch: Talent Specflow Project
 
 
@@ -12,6 +13,7 @@ Framework
 Talent
 1. Pages:
     Pages and Sections, BasePage
+    PageFactory: Init all the pages object
 2. Services:
     API (RestSharp)
 
