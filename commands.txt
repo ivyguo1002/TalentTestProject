@@ -1,0 +1,13 @@
+1. nunit
+dotnet test --filter (testcategory~smoke)|(priority=high) TalentAutomation\\Talent.Automation.csproj
+
+
+2. specflow
+The name of the feature is used as a description in a DescriptionAttribute on the class containing the test. If that is the case then you can filter on this also. So you will end up with something like
+
+.\nunit3-console.exe mytest.dll --where="Description=='Login' and cat == ie"
+
+nunit3-console TalentAutomation\Talent.Specflow\bin\Debug\netcoreapp3.1\Talent.Specflow.dll --where="cat = = smoke" or "cat == high"
+
+
+
