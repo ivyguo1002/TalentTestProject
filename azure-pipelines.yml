@@ -23,7 +23,7 @@ steps:
 - task: UseDotNet@2
   displayName: 'Install .NET Core SDK'
   inputs:
-    version: 2       #netcoreapp2 for this project
+    version: 2.2.203       #netcoreapp2 for this project
     performMultiLevelLookup: true
 
 - task: DotNetCoreCLI@2
